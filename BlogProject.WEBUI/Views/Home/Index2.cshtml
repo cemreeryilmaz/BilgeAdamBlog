@@ -1,0 +1,144 @@
+﻿@model Tuple<List<Post>, List<User>, List<Category>, List<Comment>>
+
+@{
+    List<Post> posts = Model.Item1;
+    List<User> users = Model.Item2;
+    List<Category> categories = Model.Item3;
+    List<Comment> comments = Model.Item4;
+
+    ViewData["Title"] = "Home Page";
+}
+
+<section class="blog-posts">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="all-blog-posts">
+                    <div class="row">
+                        @foreach (var item in posts)
+                        {
+                            List<Comment> commentList = comments.AsQueryable().Where(x => x.PostID == item.ID).ToList();
+                            Category category = categories.AsQueryable().Where(x => x.ID == item.CategoryID).FirstOrDefault();
+                            User user = users.AsQueryable().Where(x => x.ID == item.UserID).FirstOrDefault();
+
+
+                            <div class="col-lg-12">
+                                <div class="blog-post">
+                                    <div class="blog-thumb">
+                                        <img src="~/uploads/@item.ImagePath" alt="">
+                                    </div>
+                                    <div class="down-content">
+                                        <span>@category.CategoryName</span>
+                                        <a asp-controller="Post" asp-action="PostDetail" asp-route-id="@item.ID"><h4>@item.Title</h4></a>
+                                        <ul class="post-info post-options">
+
+                                            <li><i class="fa fa-user"></i></li>
+                                            <li><a href="#">@user.FirstName @user.LastName</a></li>
+
+                                            @* Tarih kısa formatta getirilecek *@
+                                            <li><i class="fa fa-calendar"></i></li>
+                                            <li><a href="#">@item.CreatedDate</a></li>
+
+                                            <li><i class="fa fa-comment"></i></li>
+                                            <li><a href="#">@commentList.Count()</a></li>
+                                        </ul>
+                                        <p>@item.PostDetail</p>
+                                        <div class="post-options">
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <ul class="post-tags">
+                                                        <li><i class="fa fa-tags"></i></li>
+                                                        <li><a href="#">@item.Tags</a></li>
+                                                        @*<li><a href="#">Nature</a></li>*@
+                                                    </ul>
+                                                </div>
+                                                <div class="col-6">
+                                                    <ul class="post-share">
+                                                        <li><i class="fa fa-eye"></i></li>
+                                                        <li><a href="#">@item.ViewCount</a></li>
+
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                        <div class="col-lg-12">
+                            <div class="main-button">
+                                <a asp-controller="Post" asp-action="Index">Tüm Yazıları Göster</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="sidebar">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="sidebar-item search">
+                                <form id="search_form" name="gs" method="GET" action="#">
+                                    <input type="text" name="q" class="searchText" placeholder="makale ara..." autocomplete="on">
+                                </form>
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="sidebar-item recent-posts">
+                                <div class="sidebar-heading">
+                                    <h2>Son Yazılar</h2>
+                                </div>
+                                <div class="content">
+                                    <ul>
+                                        @foreach (var item in ViewBag.SonYazilar)
+                                        {
+                                            <li>
+                                                <a href="post-details.html">
+                                                    <h5>@item.Title</h5>
+                                                    <span>@item.CreatedDate</span>
+                                                </a>
+                                            </li>
+                                        }
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="sidebar-item categories">
+                                <div class="sidebar-heading">
+                                    <h2>Kategoriler</h2>
+                                </div>
+                                <div class="content">
+                                    <ul>
+                                        @foreach (var item in ViewBag.Kategoriler)
+                                        {
+                                            <li><a href="#">&bull; @item.CategoryName</a></li>
+                                        }
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="sidebar-item tags">
+                                <div class="sidebar-heading">
+                                    <h2>Etiket Bulutu</h2>
+                                </div>
+                                <div class="content">
+                                    <ul>
+                                        <li><a href="#">Lifestyle</a></li>
+                                        <li><a href="#">Creative</a></li>
+                                        <li><a href="#">HTML5</a></li>
+                                        <li><a href="#">Inspiration</a></li>
+                                        <li><a href="#">Motivation</a></li>
+                                        <li><a href="#">PSD</a></li>
+                                        <li><a href="#">Responsive</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

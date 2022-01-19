@@ -1,0 +1,64 @@
+﻿@model User
+@{
+    ViewData["Title"] = "Insert";
+}
+<div class="row">
+    <div class="col-md-6">
+        <!-- general form elements -->
+        <div class="card card-primary">
+            <div class="card-header">
+                <h3 class="card-title text-center">Kullanıcı Ekle</h3>
+            </div>
+            <!-- /.card-header -->
+            <!-- form start -->
+            <form asp-controller="User" asp-action="Insert" method="post">
+                <div class="card-body">
+                    <div class="form-group">
+                        <label asp-for="FirstName">Adı</label>
+                        <input type="text" class="form-control" asp-for="FirstName" placeholder="Adı Giriniz...">
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="LastName">Soyadı</label>
+                        <input type="text" class="form-control" asp-for="LastName" placeholder="Soyadı Giriniz...">
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Title">Unvan</label>
+                        <input type="text" class="form-control" asp-for="Title" placeholder="Unvan Giriniz...">
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="EmailAddress">E-posta Adresi</label>
+                        <input type="email" class="form-control" asp-for="EmailAddress" placeholder="E-posta Adresi Giriniz...">
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Password">Parola</label>
+                        <input type="password" class="form-control" asp-for="Password" placeholder="Parola Giriniz...">
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ImageURL">Fotoğraf</label>
+                        <input type="text" class="form-control" asp-for="ImageURL" placeholder="Fotoğraf Seçiniz">
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="IsAdmin">Kullanıcı Rolü</label>
+                        <input type="checkbox" class="form-control" asp-for="IsAdmin">
+                    </div>
+                </div>
+                <!-- /.card-body -->
+
+                <div class="card-footer">
+                    <button type="submit" class="btn btn-primary">Kullanıcı Ekle</button>
+                </div>
+            </form>
+        </div>
+        <!-- /.card -->
+        <br />
+        @if (TempData["Message"] != null)
+        {
+            <div class="row">
+                <div class="alert alert-danger" role="alert">
+                    @TempData["Message"]
+                </div>
+            </div>
+        }
+    </div>
+</div>
+

@@ -1,0 +1,46 @@
+﻿@model Category 
+@{
+    ViewData["Title"] = "Update";
+}
+
+<div class="row">
+    <div class="col-md-6">
+        <!-- general form elements -->
+        <div class="card card-warning">
+            <div class="card-header">
+                <h3 class="card-title text-center">Kategori Güncelle</h3>
+            </div>
+            <!-- /.card-header -->
+            <!-- form start -->
+            <form asp-controller="Category" asp-action="Update" method="post">
+                <input type="hidden" asp-for="ID"/>
+                <div class="card-body">
+                    <div class="form-group">
+                        <label asp-for="CategoryName">Kategori Adı</label>
+                        <input type="text" class="form-control" asp-for="CategoryName" placeholder="Kategori Adı Giriniz...">
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Description">Kategori Açıklaması</label>
+                        <textarea rows="3" class="form-control" asp-for="Description" placeholder="Kategori Açıklaması Giriniz..."></textarea>
+                    </div>
+                </div>
+                <!-- /.card-body -->
+
+                <div class="card-footer">
+                    <button type="submit" class="btn btn-primary">Kategori Güncelle</button>
+                </div>
+            </form>
+        </div>
+        <!-- /.card -->
+        <br />
+        @if (TempData["Message"] != null)
+        {
+            <div class="row">
+                <div class="alert alert-danger" role="alert">
+                    @TempData["Message"]
+                </div>
+            </div>
+        }
+    </div>
+</div>
+

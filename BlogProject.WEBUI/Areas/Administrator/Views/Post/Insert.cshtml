@@ -1,0 +1,66 @@
+﻿@model Post
+@{
+    ViewData["Title"] = "Insert";
+}
+
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+        <form asp-controller="Post" asp-action="Insert" method="post" enctype="multipart/form-data">
+            <div class="col-md-12">
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">Makale Ekle</h3>
+
+                        @*<div class="card-tools">
+                                <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                            </div>*@
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label asp-for="Title">Makale Başlığı</label>
+                            <input type="text" asp-for="Title" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="PostDetail">İçerik</label>
+                            <textarea asp-for="PostDetail" id="summernote" class="form-control" rows="4"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="CategoryID">Kategori</label>
+                            <select asp-for="CategoryID" asp-items="@ViewBag.Categories" class="form-control custom-select">
+                                <option>Lütfen seçiniz...</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Tags">Etiketler (virgülle ayrılmış)</label>
+                            <input type="text" asp-for="Tags" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="ImagePath">Makale Görseli</label>
+                            <div class="input-group">
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" name="files">
+                                    <label class="custom-file-label">Görsel Seç</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <input type="submit" value="Makale Ekle" class="btn btn-success btn-block">
+                </div>
+            </div>
+        </form>
+    </div>
+
+</section>
+<!-- /.content -->
+@section summernote{
+    <script src="~/admintemplate/plugins/summernote/summernote-bs4.min.js"></script>
+}

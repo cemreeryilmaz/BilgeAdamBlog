@@ -1,0 +1,69 @@
+﻿@model Tuple<List<Post>, List<User>, List<Category>, List<Comment>>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<!-- Small boxes (Stat box) -->
+<div class="row">
+    <div class="col-lg-3 col-6">
+        <!-- small box -->
+        <div class="small-box bg-info">
+            <div class="inner">
+                <h3>@Model.Item1.Count</h3>
+
+                <p>Yazı</p>
+            </div>
+            <div class="icon">
+                <i class="ion ion-bag"></i>
+            </div>
+            <a asp-controller="Post" asp-action="Index" asp-area="Administrator" class="small-box-footer">Daha Fazlası <i class="fas fa-arrow-circle-right"></i></a>
+        </div>
+    </div>
+    <!-- ./col -->
+    <div class="col-lg-3 col-6">
+        <!-- small box -->
+        <div class="small-box bg-success">
+            <div class="inner">
+                <h3>@Model.Item2.Count</h3>
+
+                <p>Yazar</p>
+            </div>
+            <div class="icon">
+                <i class="ion ion-stats-bars"></i>
+            </div>
+            <a asp-controller="User" asp-action="Index" asp-area="Administrator" class="small-box-footer">Daha Fazlası <i class="fas fa-arrow-circle-right"></i></a>
+        </div>
+    </div>
+    <!-- ./col -->
+    <div class="col-lg-3 col-6">
+        <!-- small box -->
+        <div class="small-box bg-warning">
+            <div class="inner">
+                <h3>@Model.Item4.Count</h3>
+
+                <p>Yorum</p>
+            </div>
+            <div class="icon">
+                <i class="ion ion-person-add"></i>
+            </div>
+            @*<a href="#" class="small-box-footer">Daha Fazlası <i class="fas fa-arrow-circle-right"></i></a>*@
+        </div>
+    </div>
+    <!-- ./col -->
+    <div class="col-lg-3 col-6">
+        <!-- small box -->
+        <div class="small-box bg-danger">
+            <div class="inner">
+                <h3>@Model.Item3.Count</h3>
+
+                <p>Kategori</p>
+            </div>
+            <div class="icon">
+                <i class="ion ion-pie-graph"></i>
+            </div>
+            <a asp-controller="Category" asp-action="Index" asp-area="Administrator" class="small-box-footer">Daha Fazlası <i class="fas fa-arrow-circle-right"></i></a>
+        </div>
+    </div>
+    <!-- ./col -->
+</div>
+<!-- /.row -->

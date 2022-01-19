@@ -1,0 +1,77 @@
+﻿@model List<User>
+@{
+    ViewData["Title"] = "Kullanıcılar Index";
+}
+
+<div class="row">
+    <div class="col-12">
+        <a asp-controller="User" asp-action="Insert" class="btn btn-primary">Yeni Kullanıcı Ekle</a>
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Kullanıcı listesini aşağıdaki tabloda bulabilirsiniz.</h3>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+                <table id="example2" class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>Adı</th>
+                            <th>Soyadı</th>
+                            <th>Email Adresi</th>
+                            <th>Durumu</th>
+                            <th>İşlemler</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.FirstName</td>
+                                <td>@item.LastName</td>
+                                <td>@item.EmailAddress</td>
+                                <td><partial name="PartialViews/_StatusPartial" model="item.Status" /></td>
+                                <td>
+                                    <a asp-controller="User" asp-action="Activate" asp-route-id="@item.ID" class="btn btn-success btn-sm">Aktif Et</a>
+
+                                    <a asp-controller="User" asp-action="Update" asp-route-id="@item.ID" class="btn btn-warning btn-sm">Güncelle</a>
+
+                                    <a asp-controller="User" asp-action="Delete" asp-route-id="@item.ID" class="btn btn-danger btn-sm">Sil</a>
+                                </td>
+                            </tr>
+                        }
+
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th>Adı</th>
+                            <th>Soyadı</th>
+                            <th>Email Adresi</th>
+                            <th>Durumu</th>
+                            <th>İşlemler</th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+            <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+    </div>
+    <!-- /.col -->
+</div>
+<!-- /.row -->
+<!-- Page specific script -->
+@section TabloScript{
+    <script>
+        $(function () {
+            $('#example2').DataTable({
+                "paging": true,
+                "lengthChange": false,
+                "searching": false,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false,
+                "responsive": true,
+            });
+        });
+    </script>
+}
